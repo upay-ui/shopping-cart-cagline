@@ -21,4 +21,4 @@ Please read all requirements listed below before starting the project
 
 #### Optional Requirements
 1. Save data in a cloud database (Firebase, MongoDB etc...)
-2. Turn this to a Progressive Web App with a service worker and installation icons for android and IOS
+2. Turn this web application to a "Progressive Web App" with a service worker and installation icons for android and IOS
