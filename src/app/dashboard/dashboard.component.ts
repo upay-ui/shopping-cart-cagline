@@ -47,12 +47,12 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   searchProducts() {
     this.startWithStateChanged = this.startWith.subscribe(start => {
-      this.startWithStateChanged.unsubscribe();
       this.endWithStateChanged = this.endWith.subscribe(end => {
         this.productService.searchProducts(start, end).subscribe(res => {
           this.products = Product.fromJSONArray(res);
           this.productMarkAsAddedToCart();
           this.endWithStateChanged.unsubscribe();
+          this.startWithStateChanged.unsubscribe();
         });
       });
     });

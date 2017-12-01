@@ -7,7 +7,7 @@ import { MaterialModule } from './material/material.module';
     CommonModule,
     MaterialModule,
   ],
-  providers: [CartService],
+  providers: [],
 
   exports: [MaterialModule],
   declarations: []
