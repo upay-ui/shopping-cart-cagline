@@ -9,7 +9,7 @@ export class CartService {
   private products = [];
   constructor() {
     const cart = localStorage.getItem('cart');
-    this.products = JSON.parse(cart);
+    this.products = JSON.parse(cart) || [];
   }
 
   addToCart(product) {

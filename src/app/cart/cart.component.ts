@@ -16,7 +16,6 @@ export class CartComponent implements OnInit {
   public count;
 
   public cartItems;
-  displayedColumns = ['position', 'name', 'weight', 'symbol'];
 
   constructor(
     private cartService: CartService,
@@ -36,7 +35,5 @@ export class CartComponent implements OnInit {
 
   getCartItems() {
     this.cartItems = this.cartService.getCart();
-    this.cartItems = new MatTableDataSource(this.cartItems);
-
   }
 }

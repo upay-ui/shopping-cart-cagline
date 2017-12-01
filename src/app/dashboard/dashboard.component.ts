@@ -1,8 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { AngularFireDatabase } from 'angularfire2/database';
 import { Subscription } from 'rxjs/Subscription';
-
-import { Subject } from 'rxjs/Subject';
+// import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
 
 import { AuthService } from '../core/auth.service';
@@ -15,46 +13,38 @@ import { ProductService } from '../product/product.service';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit, OnDestroy {
-  startWith = new Subject();
-  endWith = new Subject();
+
+  // startWith = new Subject();
+  // endWith = new Subject();
 
   products: Product[];
-
-  private productsStateChanged: Subscription;
-  private startWithStateChanged: Subscription;
-  private endWithStateChanged: Subscription;
-
+  private prodSubs: Subscription;
+  private searchProdSubs: Subscription;
 
   constructor(
-    private db: AngularFireDatabase,
     private authService: AuthService,
     private productService: ProductService
   ) { }
 
   ngOnInit() {
     this.getProducts();
-    this.searchProducts();
+    // this.searchProducts();
 
+  }
+
+  ngOnDestroy() {
+    if (typeof this.searchProdSubs !== 'undefined') {
+      this.searchProdSubs.unsubscribe();
+    }
+    if (typeof this.prodSubs !== 'undefined') {
+      this.prodSubs.unsubscribe();
+    }
   }
 
   getProducts() {
-    this.productsStateChanged = this.productService.getProducts().subscribe(res => {
+    this.prodSubs = this.productService.getProducts().subscribe(res => {
       this.products = Product.fromJSONArray(res);
       this.productMarkAsAddedToCart();
-
-    });
-  }
-
-  searchProducts() {
-    this.startWithStateChanged = this.startWith.subscribe(start => {
-      this.endWithStateChanged = this.endWith.subscribe(end => {
-        this.productService.searchProducts(start, end).subscribe(res => {
-          this.products = Product.fromJSONArray(res);
-          this.productMarkAsAddedToCart();
-          this.endWithStateChanged.unsubscribe();
-          this.startWithStateChanged.unsubscribe();
-        });
-      });
     });
   }
 
@@ -64,12 +54,17 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   search($event) {
     const queryText = $event.target.value;
-    this.startWith.next(queryText);
-    this.endWith.next(queryText + '\uf8ff');
-  }
+    const start = queryText;
+    const end = queryText + '\uf8ff';
 
-  ngOnDestroy() {
-    this.productsStateChanged.unsubscribe();
+    if (typeof this.searchProdSubs !== 'undefined') {
+      this.searchProdSubs.unsubscribe();
+    }
 
+    this.searchProdSubs = this.productService.searchProducts(start, end)
+      .subscribe(res => {
+        this.products = Product.fromJSONArray(res);
+        this.productMarkAsAddedToCart();
+      });
   }
 }
