@@ -1,24 +1,27 @@
-# Shopping-cart
-Front-end assessment
+# ShoppingCart
 
-Please read all requirements listed below before starting the project
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.5.4.
 
-##  Shopping cart must contains following functionality
+## Development server
 
-1. User should be able to register into the application by providing (email, password and mobile number)
-2. User login (username and password, Google, Facebook, Github)
-2. Dashboard with product list
-3. user should be able to search products
-4. logged in user should be able to rate the product
-5. user should be able to add products to a shopping car
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-### Technology requirements
+## Code scaffolding
 
-1. you must use angular-cli to build the project using the latest version of angular.
-2. you must use angular material 2 to build the front-end of the project.
-3. you must write all styles in SCSS format
-4. you must use flexbox or css grids to layout your page
+Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-#### Optional Requirements
-1. Save data in a cloud database (Firebase, MongoDB etc...)
-2. Turn this web application to a "Progressive Web App" with a service worker and installation icons for android and IOS
+## Build
+
+Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+
+## Running unit tests
+
+Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+
+## Running end-to-end tests
+
+Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+
+## Further help
+
+To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).

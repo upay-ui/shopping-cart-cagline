@@ -1,0 +1,65 @@
+<div class="row">
+  <div class="col-md-offset-4 col-md-4">
+    <mat-card class="product-card">
+      <!-- <mat-card-header>
+        <mat-card-title>
+          <h2>Join with us</h2>
+        </mat-card-title>
+        <mat-card-subtitle></mat-card-subtitle>
+      </mat-card-header> -->
+      <mat-card-content>
+        <mat-tab-group class="login-tabs">
+          <mat-tab label="Login" class="col-md-6">
+            <form [formGroup]="loginForm" name="login" (ngSubmit)="login()" autocomplete="off">
+              <div class="form-container">
+                <mat-form-field>
+                  <input matInput type="text" name="email" formControlName="email" required placeholder="Email">
+                </mat-form-field>
+                <mat-form-field>
+                  <input matInput type="password" name="password" formControlName="password" required placeholder="Password" [type]="loginPwdHide ? 'password' : 'text'">
+                  <mat-icon matSuffix (click)="loginPwdHide = !loginPwdHide">{{loginPwdHide ? 'visibility' : 'visibility_off'}}</mat-icon>
+                </mat-form-field>
+                <button type="submit" mat-raised-button color="primary">Login</button>
+              </div>
+            </form>
+            <div class="divider mtb-40">
+              <span>OR</span>
+            </div>
+
+            <div class="row">
+              <button type="button" class="col-md-12 mb-10 btn-socail google" mat-raised-button (click)="loginWithGoogle()">Google</button>
+              <button type="button" class="col-md-12 mb-10 btn-socail facebook" mat-raised-button (click)="loginWithFacebook()">Facebook</button>
+              <button type="button" class="col-md-12 mb-10 btn-socail github" mat-raised-button (click)="loginWithGithub()">Github</button>
+            </div>
+          </mat-tab>
+          <mat-tab label="Register" class="col-md-6">
+            <form [formGroup]="registerForm" name="register" (ngSubmit)="signUp()" autocomplete="off">
+              <div class="form-container">
+                <mat-form-field>
+                  <input matInput type="email" name="username" formControlName="email" required placeholder="Email" email>
+                </mat-form-field>
+                <mat-form-field>
+                  <input matInput [type]="registerPwdHide ? 'password' : 'text'" name="password" formControlName="password" required placeholder="Password">
+                  <mat-icon matSuffix (click)="registerPwdHide = !registerPwdHide">{{registerPwdHide ? 'visibility' : 'visibility_off'}}</mat-icon>
+                </mat-form-field>
+                <mat-form-field>
+                  <input matInput type="number" name="mobile" formControlName="mobile" placeholder="Mobile number">
+                </mat-form-field>
+                <button type="submit" mat-raised-button color="primary">Register</button>
+              </div>
+            </form>
+          </mat-tab>
+        </mat-tab-group>
+        <!-- <div class="row">
+
+          <div class="col-md-6">
+            
+          </div>
+          <div class="col-md-6">
+            
+          </div>
+        </div> -->
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

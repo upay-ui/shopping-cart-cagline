@@ -1,0 +1,9 @@
+<div class="plr-30">
+    <mat-form-field id="search">
+        <input matInput (keyup)="search($event)"  placeholder="Search product">
+        <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+</div>
+<div class="p-30">
+    <app-product-grid [products]="products"></app-product-grid>
+</div>

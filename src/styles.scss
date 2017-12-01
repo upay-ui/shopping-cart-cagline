@@ -1,0 +1,43 @@
+// @import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+// @import '~@angular/material/prebuilt-themes/pink-bluegrey.css';
+// @import '~@angular/material/prebuilt-themes/purple-green.css';
+// @import "./normalize.scss";
+@import "./flexboxgrid.scss";
+@import "./spacing.scss";
+body {
+    font-family: Roboto, Arial, sans-serif;
+    margin: 0;
+}
+
+a{
+    color: #444444;
+    text-decoration: none;
+}
+
+.mat-primary a{
+    color: #ffffff;
+}
+
+.divider {
+    position: relative;
+    width: 100%;
+    text-align: center;
+
+    &::before,
+    &::after {
+        position: absolute;
+        width: 130px;
+        height: 1px;
+        top: 50%;
+        background-color: rgba(100, 100, 100,.5);
+        content: '';
+    }
+
+    &::before {
+        left: 0;
+    }
+    &::after {
+        right: 0;
+    }
+}

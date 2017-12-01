@@ -1,0 +1,10 @@
+<mat-toolbar color="primary" class="mb-30">
+  <mat-toolbar-row>
+    <a routerLink="/" class="docs-navbar-hide-small docs-button mat-button">Shopping Cart</a>
+    <span class="spacer"></span>
+    <a href="">{{count}}</a>
+    <mat-icon>user</mat-icon>
+    <a class="mat-button" mat-raised-button *ngIf="!currentUser" routerLink="login">Login</a>
+    <a class="mat-button" *ngIf="currentUser" (click)="signOut()">{{currentUserDisplayName}} (Logout)</a>
+  </mat-toolbar-row>
+</mat-toolbar>
