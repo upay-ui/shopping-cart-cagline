@@ -1,4 +1,5 @@
 export class Product {
+    public id: Number;
     public name: String;
     public brand: String;
     public picture: String;
@@ -6,6 +7,7 @@ export class Product {
     public inCart: Boolean = false;
 
     constructor(obj) {
+        this.id = obj.id;
         this.name = obj.name;
         this.brand = obj.brand;
         this.picture = obj.picture;

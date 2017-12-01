@@ -5,3 +5,13 @@ mat-toolbar {
 .spacer {
     flex: 1 1 auto;
 }
+
+#min-cart {
+    mat-icon {
+        vertical-align: bottom;
+    }
+    span {
+        font-size: .8em;
+        font-weight: 400;
+    }
+}

@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 
 import { AuthService } from '../../core/auth.service';
-import { CartService } from '../../shared/cart.service';
+import { CartService } from '../../cart/cart.service';
 
 @Component({
   selector: 'app-nav',
@@ -27,21 +27,25 @@ export class NavComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
 
+    this.count = this.cartService.getCartCount;
+
     this.currentUserStateChanged = this.authService.currentUser.subscribe((currentUser) => {
       this.currentUser = currentUser;
       this.currentUserDisplayName = this.authService.currentUserDisplayName;
     });
 
     this.cartStateChanged = this.cartService.productsState.subscribe(status => {
+      console.log('status', status);
       this.count = status;
     });
   }
 
-  ngOnDestroy() {
-    this.currentUserStateChanged.unsubscribe();
-  }
-
   signOut() {
     this.authService.signOut();
+  }
+
+  ngOnDestroy() {
+    this.currentUserStateChanged.unsubscribe();
+    this.cartStateChanged.unsubscribe();
   }
 }

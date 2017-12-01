@@ -1,19 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AngularFireDatabase } from 'angularfire2/database';
+import { Subscription } from 'rxjs/Subscription';
 
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
-
-import {
-  MatToolbarModule,
-  MatSlideToggleModule,
-  MatCardModule,
-  MatCardTitle,
-  MatCardContent,
-  MatGridListModule,
-  MatGridList,
-  MatGridTile
-} from '@angular/material';
 
 import { AuthService } from '../core/auth.service';
 import { Product } from '../product/product';
@@ -24,11 +14,17 @@ import { ProductService } from '../product/product.service';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent implements OnInit, OnDestroy {
   startWith = new Subject();
   endWith = new Subject();
 
   products: Product[];
+
+  private productsStateChanged: Subscription;
+  private startWithStateChanged: Subscription;
+  private endWithStateChanged: Subscription;
+
+
   constructor(
     private db: AngularFireDatabase,
     private authService: AuthService,
@@ -42,24 +38,38 @@ export class DashboardComponent implements OnInit {
   }
 
   getProducts() {
-    this.productService.getProducts().subscribe(res => {
+    this.productsStateChanged = this.productService.getProducts().subscribe(res => {
       this.products = Product.fromJSONArray(res);
+      this.productMarkAsAddedToCart();
+
     });
   }
 
   searchProducts() {
-    this.startWith.subscribe(start => {
-      this.endWith.subscribe(end => {
+    this.startWithStateChanged = this.startWith.subscribe(start => {
+      this.startWithStateChanged.unsubscribe();
+      this.endWithStateChanged = this.endWith.subscribe(end => {
         this.productService.searchProducts(start, end).subscribe(res => {
           this.products = Product.fromJSONArray(res);
+          this.productMarkAsAddedToCart();
+          this.endWithStateChanged.unsubscribe();
         });
       });
     });
+  }
+
+  productMarkAsAddedToCart() {
+    this.products = this.productService.productMarkAsAddedToCart(this.products);
   }
 
   search($event) {
     const queryText = $event.target.value;
     this.startWith.next(queryText);
     this.endWith.next(queryText + '\uf8ff');
+  }
+
+  ngOnDestroy() {
+    this.productsStateChanged.unsubscribe();
+
   }
 }

@@ -22,6 +22,7 @@ import { ProductComponent } from './product/product.component';
 import { CartComponent } from './cart/cart.component';
 
 import { ProductService } from './product/product.service';
+import { CartService } from './cart/cart.service';
 
 import { AppRoutingModule } from './app-routing.module';
 
@@ -49,7 +50,7 @@ import { AppRoutingModule } from './app-routing.module';
     AppRoutingModule,
 
   ],
-  providers: [ProductService],
+  providers: [ProductService, CartService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

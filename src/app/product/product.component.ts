@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-import { CartService } from './../shared/cart.service';
+import { CartService } from './../cart/cart.service';
 
 import { Product } from './product';
 
@@ -21,11 +21,13 @@ export class ProductComponent implements OnInit {
   }
 
   addToCart(product) {
-    this.cartService.addToCart(product.addedToCart());
+    product.addedToCart();
+    this.cartService.addToCart(product);
   }
 
   removeFromCart(product) {
-    this.cartService.removeFromCart(product.removedFromCart());
+    product.removedFromCart();
+    this.cartService.removeFromCart(product);
   }
 
 
