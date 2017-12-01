@@ -16,8 +16,8 @@ import { AuthService } from '../core/auth.service';
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   registerForm: FormGroup;
-  loginPwdHide: false;
-  registerPwdHide: false;
+  loginPwdHide: Boolean = true;
+  registerPwdHide: Boolean = true;
 
   // logingM: Login;
   // registerForm: Register;
