@@ -4,6 +4,7 @@ import { ReactiveFormsModule, FormGroup, FormBuilder, Validators } from '@angula
 
 import { AngularFireAuth } from 'angularfire2/auth';
 
+import { Constants } from '../app-constants';
 import { AuthService } from '../core/auth.service';
 // import { Login } from './login';
 // import { Register } from './register';
@@ -31,7 +32,7 @@ export class LoginComponent implements OnInit {
   ) {
     this.authService.authState.subscribe(auth => {
       if (auth) {
-        this.router.navigate(['/dashboard']);
+        this.router.navigate([Constants.routeDashboard]);
       }
     });
 
@@ -78,6 +79,7 @@ export class LoginComponent implements OnInit {
 
   login() {
     this.authService.emailLogin(this.loginForm.value.email, this.loginForm.value.password).then((data) => {
+      console.log(data);
     });
   }
 
@@ -110,7 +112,7 @@ export class LoginComponent implements OnInit {
 
   navigateToDashboard() {
     if (this.authService.currentUser) {
-      this.router.navigate(['/dashboard']);
+      this.router.navigate([Constants.routeDashboard]);
     }
   }
 

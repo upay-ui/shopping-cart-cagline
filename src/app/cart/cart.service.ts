@@ -1,13 +1,21 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
 
+import { MatSnackBar } from '@angular/material';
+
+import { Product } from '../product/product';
+
 @Injectable()
 export class CartService {
   private productsSubject = new Subject<any>();
   productsState: any = this.productsSubject.asObservable();
 
-  private products = [];
-  constructor() {
+  private products = Array<Product>();
+
+  constructor(
+    private snackBar: MatSnackBar
+
+  ) {
     const cart = localStorage.getItem('cart');
     this.products = JSON.parse(cart) || [];
   }
@@ -15,7 +23,9 @@ export class CartService {
   addToCart(product) {
     this.products.push(product);
     this.saveCartLocally();
-    this.productsSubject.next(this.getCartCount);
+    this.snackBar.open('Product successfully added to your cart', 'Added', { duration: 2000 });
+
+    this.productsSubject.next(this.cartCount);
   }
 
   removeFromCart(product) {
@@ -23,7 +33,8 @@ export class CartService {
       return p.id !== product.id;
     });
     this.saveCartLocally();
-    this.productsSubject.next(this.getCartCount);
+    this.snackBar.open('Product has been removed from your cart', 'Removed', { duration: 2000 });
+    this.productsSubject.next(this.cartCount);
   }
 
   saveCartLocally() {
@@ -34,8 +45,15 @@ export class CartService {
     return this.products;
   }
 
-  get getCartCount() {
-    // this.productsSubject.next(this.getCartCount);
+  get cartCount() {
+    // this.productsSubject.next(this.cartCount);
     return this.products.length;
+  }
+
+  get totalPrice() {
+    return this.products.reduce((p, c) => {
+      console.log(p, Number(c.price));
+      return p = p + Number(c.price);
+    }, 0);
   }
 }

@@ -8,6 +8,8 @@ import * as firebase from 'firebase';
 import { Subject } from 'rxjs/Subject';
 
 
+import { MatSnackBar } from '@angular/material';
+
 @Injectable()
 export class AuthService {
   private authSubject = new Subject<any>();
@@ -17,7 +19,8 @@ export class AuthService {
   constructor(
     private afAuth: AngularFireAuth,
     private db: AngularFireDatabase,
-    private router: Router
+    private router: Router,
+    private snackBar: MatSnackBar
   ) {
     this.afAuth.authState.subscribe((auth) => {
       if (auth) {
@@ -92,7 +95,9 @@ export class AuthService {
         this.authState = credential.user;
         this.updateUserData();
       })
-      .catch(error => console.log(error));
+      .catch(error => {
+        this.snackBar.open(error.message, 'Error');
+      });
   }
 
 
@@ -103,7 +108,9 @@ export class AuthService {
         this.authState = user;
         this.updateUserData(userData);
       })
-      .catch(error => console.log(error));
+      .catch(error => {
+        this.snackBar.open(error.message, 'Error', { duration: 2000 });
+      });
   }
 
   //// Email/Password Auth ////
@@ -113,7 +120,9 @@ export class AuthService {
         this.authState = user;
         this.updateUserData(userData);
       })
-      .catch(error => console.log(error));
+      .catch(error => {
+        this.snackBar.open(error.message, 'Error');
+      });
   }
 
   emailLogin(email: string, password: string, userData?: any) {
@@ -122,7 +131,9 @@ export class AuthService {
         this.authState = user;
         this.updateUserData(userData);
       })
-      .catch(error => console.log(error));
+      .catch(error => {
+        this.snackBar.open(error.message, 'Error', { duration: 2000 });
+      });
   }
 
   // Sends email allowing user to reset password
@@ -131,7 +142,9 @@ export class AuthService {
 
     return auth.sendPasswordResetEmail(email)
       .then(() => console.log('email sent'))
-      .catch((error) => console.log(error));
+      .catch(error => {
+        this.snackBar.open(error.message, 'Error', { duration: 2000 });
+      });
   }
 
 
@@ -157,8 +170,9 @@ export class AuthService {
     }
 
     this.db.object(path).update(data)
-      .catch(error => console.log(error));
-
+      .catch(error => {
+        this.snackBar.open(error.message, 'Error', { duration: 2000 });
+      });
   }
 
 }

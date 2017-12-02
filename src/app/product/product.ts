@@ -3,7 +3,7 @@ export class Product {
     public name: String;
     public brand: String;
     public picture: String;
-    public price: String;
+    public price: number;
     public inCart: Boolean = false;
 
     constructor(obj) {
@@ -26,6 +26,4 @@ export class Product {
         this.inCart = false;
 
     }
-
-
 }
