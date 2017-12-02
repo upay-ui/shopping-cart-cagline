@@ -10,15 +10,15 @@
 .product-card-label {
     height: 56px;
     .mat-card-title {
-        line-height: 1em;
-        margin: 0;
         font-size: 1.3em;
+        line-height: 1.3em;
+        margin: 0;
     }
     .mat-card-subtitle {
-        line-height: 1.3em;
-        margin-bottom: 0;
-        margin-top: 16px;
         font-size: 1em;
+        line-height: 1.3em;
+        margin-top: 8px;
+        margin-bottom: 0;
     }
 }
 
