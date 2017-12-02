@@ -52,7 +52,6 @@ export class CartService {
 
   get totalPrice() {
     return this.products.reduce((p, c) => {
-      console.log(p, Number(c.price));
       return p = p + Number(c.price);
     }, 0);
   }

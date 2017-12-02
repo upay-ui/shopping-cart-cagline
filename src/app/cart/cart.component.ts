@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs/Subscription';
 
 import { CartService } from '../cart/cart.service';
@@ -44,6 +44,8 @@ export class CartComponent implements OnInit {
   }
 
   get totalPrice() {
-    return this.cartService.totalPrice;
+    const totalPrice = this.cartService.totalPrice;
+    console.log(totalPrice);
+    return totalPrice;
   }
 }
