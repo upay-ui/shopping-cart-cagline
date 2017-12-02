@@ -1,0 +1,27 @@
+.product-card {
+    img {
+        width: 52px;
+        height: 52px;
+        float: left;
+        margin-right: 24px;
+    }
+}
+
+.product-card-label {
+    height: 56px;
+    .mat-card-title {
+        line-height: 1em;
+        margin: 0;
+        font-size: 1.3em;
+    }
+    .mat-card-subtitle {
+        line-height: 1.3em;
+        margin-bottom: 0;
+        margin-top: 16px;
+        font-size: 1em;
+    }
+}
+
+.product-cart-price {
+    line-height: 56px;
+}

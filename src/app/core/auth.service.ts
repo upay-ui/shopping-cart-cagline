@@ -15,6 +15,7 @@ export class AuthService {
   private authSubject = new Subject<any>();
 
   authState: any = this.authSubject.asObservable();
+  user: any= null;
 
   constructor(
     private afAuth: AngularFireAuth,
@@ -24,7 +25,7 @@ export class AuthService {
   ) {
     this.afAuth.authState.subscribe((auth) => {
       if (auth) {
-        this.authState = auth;
+        this.user = auth;
         this.authSubject.next(this.authState);
       } else {
         this.authSubject.next(false);
@@ -34,12 +35,12 @@ export class AuthService {
 
   // Returns true if user is logged in
   get authenticated(): boolean {
-    return this.authState !== null;
+    return this.user !== null;
   }
 
   // Returns current user data
   get currentUser(): any {
-    return this.authenticated ? this.authState : null;
+    return this.authenticated ? this.user : null;
   }
 
   // Returns
@@ -49,22 +50,22 @@ export class AuthService {
 
   // Returns current user UID
   get currentUserId(): string {
-    return this.authenticated ? this.authState.uid : '';
+    return this.authenticated ? this.user.uid : '';
   }
 
   // Anonymous User
   get currentUserAnonymous(): boolean {
-    return this.authenticated ? this.authState.isAnonymous : false;
+    return this.authenticated ? this.user.isAnonymous : false;
   }
 
   // Returns current user display name or Guest
   get currentUserDisplayName(): string {
-    if (!this.authState) {
+    if (!this.user) {
       return 'Guest';
     } else if (this.currentUserAnonymous) {
       return 'Anonymous';
     } else {
-      return this.authState['displayName'] || 'User without a Name';
+      return this.user['displayName'] || 'User without a Name';
     }
   }
 
@@ -92,7 +93,7 @@ export class AuthService {
   private socialSignIn(provider) {
     return this.afAuth.auth.signInWithPopup(provider)
       .then((credential) => {
-        this.authState = credential.user;
+        this.user = credential.user;
         this.updateUserData();
       })
       .catch(error => {
@@ -105,7 +106,7 @@ export class AuthService {
   anonymousLogin(userData?: any) {
     return this.afAuth.auth.signInAnonymously()
       .then((user) => {
-        this.authState = user;
+        this.user = user;
         this.updateUserData(userData);
       })
       .catch(error => {
@@ -117,7 +118,7 @@ export class AuthService {
   emailSignUp(email: string, password: string, userData?: any) {
     return this.afAuth.auth.createUserWithEmailAndPassword(email, password)
       .then((user) => {
-        this.authState = user;
+        this.user = user;
         this.updateUserData(userData);
       })
       .catch(error => {
@@ -128,7 +129,7 @@ export class AuthService {
   emailLogin(email: string, password: string, userData?: any) {
     return this.afAuth.auth.signInWithEmailAndPassword(email, password)
       .then((user) => {
-        this.authState = user;
+        this.user = user;
         this.updateUserData(userData);
       })
       .catch(error => {
@@ -162,8 +163,8 @@ export class AuthService {
     // useful if your app displays information about users or for admin features
     const path = `users/${this.currentUserId}`; // Endpoint on firebase
     const data = {
-      email: this.authState.email,
-      name: this.authState.displayName || this.authState.email,
+      email: this.user.email,
+      name: this.user.displayName || this.user.email,
     };
     if ((userData || {}).mobile) {
       data['mobile'] = userData.mobile;

@@ -1,0 +1,20 @@
+.product-card {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.cart-info {
+    line-height: 1.5em;
+    padding: 0 24px;
+    .cart-info-label {
+        text-align: right;
+        text-transform: uppercase;
+    }
+    .cart-info-quantity {
+        opacity: .8;
+        font-size: .8em;
+    }
+    .cart-info-total-price {
+        font-weight: 600;
+    }
+}

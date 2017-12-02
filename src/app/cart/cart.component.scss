@@ -1,25 +1,11 @@
-.product-card{
-    margin-top: 10px;
-    margin-bottom: 10px;
-
-    img{
-        width: 52px;
-        height: 52px;
-        float: left;
-        margin-right: 24px;
-    }
-}
-
-.cart-info {
-    line-height: 36px;
-    .cart-info-label{
-        text-align: right;
-    }
-}
-
-.back-btn{
+.back-btn {
     float: left;
 }
-.next-btn{
+
+.next-btn {
     float: right;
+}
+
+mat-horizontal-stepper {
+    background: #fafafa;
 }

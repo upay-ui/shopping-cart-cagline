@@ -7,7 +7,7 @@
       <span>{{count}}</span>
     </a>
     <mat-icon>user</mat-icon>
-    <a class="mat-button" mat-raised-button *ngIf="!currentUser" routerLink="login">Login</a>
+    <a class="mat-button" *ngIf="!currentUser" routerLink="login">Login</a>
     <a class="mat-button" *ngIf="currentUser" (click)="signOut()">{{currentUserDisplayName}} (Logout)</a>
   </mat-toolbar-row>
 </mat-toolbar>

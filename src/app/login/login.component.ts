@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
-import { ReactiveFormsModule, FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Subscription } from 'rxjs/Subscription';
 
 import { AngularFireAuth } from 'angularfire2/auth';
 
@@ -14,11 +15,12 @@ import { AuthService } from '../core/auth.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
   loginForm: FormGroup;
   registerForm: FormGroup;
   loginPwdHide: Boolean = true;
   registerPwdHide: Boolean = true;
+  authSubs: Subscription;
 
   // logingM: Login;
   // registerForm: Register;
@@ -30,7 +32,8 @@ export class LoginComponent implements OnInit {
     private afAuth: AngularFireAuth,
 
   ) {
-    this.authService.authState.subscribe(auth => {
+    this.authSubs = this.authService.authState.subscribe(auth => {
+      console.log(auth);
       if (auth) {
         this.router.navigate([Constants.routeDashboard]);
       }
@@ -40,6 +43,10 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.buildForm();
+  }
+
+  ngOnDestroy() {
+    this.authSubs.unsubscribe();
   }
 
   buildForm(): void {
@@ -79,7 +86,7 @@ export class LoginComponent implements OnInit {
 
   login() {
     this.authService.emailLogin(this.loginForm.value.email, this.loginForm.value.password).then((data) => {
-      console.log(data);
+      // console.log(data);
     });
   }
 
@@ -94,7 +101,7 @@ export class LoginComponent implements OnInit {
 
   loginWithGoogle() {
     this.authService.googleLogin().then((data) => {
-      this.navigateToDashboard();
+      // this.navigateToDashboard();
     });
   }
 

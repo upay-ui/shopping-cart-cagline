@@ -13,10 +13,7 @@ import { MatTableDataSource } from '@angular/material';
   styleUrls: ['./cart.component.scss']
 })
 export class CartComponent implements OnInit {
-  private cartStateChanged: Subscription;
-  public count;
 
-  public cartItems;
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
 
@@ -24,28 +21,14 @@ export class CartComponent implements OnInit {
     private cartService: CartService,
     private _formBuilder: FormBuilder
   ) {
-    this.count = this.cartService.cartCount;
-    this.cartStateChanged = this.cartService.productsState.subscribe(status => {
-      this.count = status;
-      this.getCartItems();
-    });
+
   }
 
   ngOnInit() {
-    this.getCartItems();
     this.firstFormGroup = this._formBuilder.group({
     });
     this.secondFormGroup = this._formBuilder.group({
     });
   }
 
-  getCartItems() {
-    this.cartItems = this.cartService.getCart();
-  }
-
-  get totalPrice() {
-    const totalPrice = this.cartService.totalPrice;
-    console.log(totalPrice);
-    return totalPrice;
-  }
 }

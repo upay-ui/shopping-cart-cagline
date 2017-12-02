@@ -29,7 +29,7 @@ export class NavComponent implements OnInit, OnDestroy {
 
     this.count = this.cartService.cartCount;
 
-    this.currentUserStateChanged = this.authService.currentUser.subscribe((currentUser) => {
+    this.currentUserStateChanged = this.authService.authState.subscribe((currentUser) => {
       this.currentUser = currentUser;
       this.currentUserDisplayName = this.authService.currentUserDisplayName;
     });

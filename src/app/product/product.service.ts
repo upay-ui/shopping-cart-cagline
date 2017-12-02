@@ -32,16 +32,16 @@ export class ProductService {
     return productlist.valueChanges();
   }
 
-  productMarkAsAddedToCart(products: Array<Product>) {
-    const cart = localStorage.getItem('cart');
-    const productsInCart: Array<Product> = JSON.parse(cart);
+  // productMarkAsAddedToCart(products: Array<Product>) {
+  //   const cart = localStorage.getItem('cart');
+  //   const productsInCart: Array<Product> = JSON.parse(cart);
 
-    return products.map(p => {
-      const isInCart = productsInCart.filter(x => p.id === x.id);
-      if (isInCart.length > 0) {
-        p.addedToCart();
-      }
-      return p;
-    });
-  }
+  //   return products.map(p => {
+  //     const isInCart = productsInCart.filter(x => p.id === x.id);
+  //     if (isInCart.length > 0) {
+  //       p.addedToCart();
+  //     }
+  //     return p;
+  //   });
+  // }
 }

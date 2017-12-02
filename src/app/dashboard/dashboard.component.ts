@@ -1,9 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
-// import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
 
-import { AuthService } from '../core/auth.service';
 import { Product } from '../product/product';
 import { ProductService } from '../product/product.service';
 
@@ -14,15 +12,11 @@ import { ProductService } from '../product/product.service';
 })
 export class DashboardComponent implements OnInit, OnDestroy {
 
-  // startWith = new Subject();
-  // endWith = new Subject();
-
   products: Product[];
   private prodSubs: Subscription;
   private searchProdSubs: Subscription;
 
   constructor(
-    private authService: AuthService,
     private productService: ProductService
   ) { }
 
@@ -44,13 +38,13 @@ export class DashboardComponent implements OnInit, OnDestroy {
   getProducts() {
     this.prodSubs = this.productService.getProducts().subscribe(res => {
       this.products = Product.fromJSONArray(res);
-      this.productMarkAsAddedToCart();
+      // this.productMarkAsAddedToCart();
     });
   }
 
-  productMarkAsAddedToCart() {
-    this.products = this.productService.productMarkAsAddedToCart(this.products);
-  }
+  // productMarkAsAddedToCart() {
+  //   this.products = this.productService.productMarkAsAddedToCart(this.products);
+  // }
 
   search($event) {
     const queryText = $event.target.value;
@@ -64,7 +58,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.searchProdSubs = this.productService.searchProducts(start, end)
       .subscribe(res => {
         this.products = Product.fromJSONArray(res);
-        this.productMarkAsAddedToCart();
+        // this.productMarkAsAddedToCart();
       });
   }
 }

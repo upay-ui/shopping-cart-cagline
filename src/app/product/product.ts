@@ -1,5 +1,5 @@
 export class Product {
-    public id: Number;
+    public id: number;
     public name: String;
     public brand: String;
     public picture: String;

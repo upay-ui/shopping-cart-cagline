@@ -4,30 +4,7 @@
     <mat-step>
       <form [formGroup]="firstFormGroup">
         <ng-template matStepLabel>My cart</ng-template>
-        <mat-card class="product-card col-md-12" *ngFor="let product of cartItems">
-          <div class="row">
-            <div class="col-md">
-              <img [src]="product.picture" alt="Photo of a Shiba Inu">
-              <mat-card-header>
-                <mat-card-title>{{product.name}}</mat-card-title>
-                <mat-card-subtitle>{{product.brand}}</mat-card-subtitle>
-              </mat-card-header>
-            </div>
-            <div class="col-md-2">
-              <button mat-button>{{product.price | currency }}</button>
-            </div>
-          </div>
-        </mat-card>
-        <mat-card class="cart-info col-md-12">
-          <div class="row">
-            <div class="col-md-10 cart-info-label">
-              <strong>Total Price</strong>
-            </div>
-            <div class="col-md-2">
-              <button mat-button>{{totalPrice}}</button>
-            </div>
-          </div>
-        </mat-card>
+        <app-cart-items ></app-cart-items>
         <div class="mt-30">
           <a routerLink="/" mat-raised-button matStepperPrevious color="primary" class="back-btn">Continue Shopping</a>
           <button mat-raised-button matStepperNext color="accent" class="next-btn">Checkout</button>
@@ -37,6 +14,7 @@
     <mat-step [stepControl]="secondFormGroup">
       <form [formGroup]="secondFormGroup">
         <ng-template matStepLabel>Dilivery</ng-template>
+
         <div class="mt-30">
           <button mat-raised-button matStepperPrevious color="primary" class="back-btn">Back to cart</button>
           <button mat-raised-button matStepperNext color="accent" class="next-btn">Next</button>
@@ -52,4 +30,5 @@
       </div>
     </mat-step>
   </mat-horizontal-stepper>
+
 </div>
