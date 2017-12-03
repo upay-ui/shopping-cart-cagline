@@ -1,17 +1,17 @@
-<mat-card class="product-card col-md-12" *ngFor="let product of products">
+<mat-card class="product-card col-sm-12" *ngFor="let product of products">
   <app-cart-item [product]="product"></app-cart-item>
 </mat-card>
 <div class="cart-info">
   <div class="row">
-    <div class="col-md-9 cart-info-label">
+    <div class="col-md-9 col-sm-6 col-xs-6 cart-info-label">
       <div class="cart-info-quantity">Quanitity</div>
       <div class="cart-info-total-price">Total Price</div>
     </div>
-    <div class="col-md-2 text-right">
+    <div class="col-md-2  col-sm-6  col-xs-6 text-right">
       <div class="cart-info-quantity">{{count}}</div>
       <div class="cart-info-total-price">{{totalPrice | currency }}</div>
     </div>
-    <div class="col-md-1 text-right">
+    <div class="col-md-2 col-sm col-xs text-right">
     </div>
   </div>
 </div>

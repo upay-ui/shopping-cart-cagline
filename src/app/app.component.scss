@@ -8,3 +8,17 @@ app-nav{
 .main {
     margin-top: 100px;
 }
+
+@media (max-width: 575px) {
+    .container-fluid {
+        padding-left: 0rem;
+        padding-right: 0rem;
+    }
+}
+
+@media (min-width: 576px) and (max-width: 767px) {
+    .container-fluid {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+}

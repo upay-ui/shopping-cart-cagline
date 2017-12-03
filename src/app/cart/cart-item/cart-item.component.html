@@ -1,17 +1,17 @@
 <div class="row product-card">
-  <div class="col-md">
+  <div class="col-sm-6 col-xs-12">
     <img [src]="product.picture" alt="{{ product.name }}">
     <mat-card-header class="product-card-label">
       <mat-card-title>{{ product.name }}</mat-card-title>
       <mat-card-subtitle>{{ product.brand }}</mat-card-subtitle>
     </mat-card-header>
   </div>
-  <div class="col-md-5 text-right product-cart-price">
+  <div class="col-sm-5 col-xs-12 text-right product-cart-price">
     {{ product.quantity }} x {{ product.price | currency }} = {{ (product.price * product.quantity) | currency }}
   </div>
-  <div class="col-md-1 text-right">
-    <button mat-icon-button color="warn">
-      <mat-icon aria-label="Example icon-button with a heart icon" (click)="removeFromCart(product)">close</mat-icon>
+  <div class="col-sm-1 col-xs-12 remove-btn text-right">
+    <button mat-icon-button color="warn" (click)="removeFromCart(product)">
+      <mat-icon aria-label="Example icon-button with a heart icon">close</mat-icon>
     </button>
   </div>
 </div>
