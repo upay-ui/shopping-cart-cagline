@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 
 import { CartService } from '../../cart/cart.service';
@@ -8,7 +8,7 @@ import { CartService } from '../../cart/cart.service';
   templateUrl: './cart-items.component.html',
   styleUrls: ['./cart-items.component.scss']
 })
-export class CartItemsComponent implements OnInit {
+export class CartItemsComponent implements OnInit, OnDestroy {
 
   private cartStateChanged: Subscription;
 
@@ -20,13 +20,16 @@ export class CartItemsComponent implements OnInit {
     private cartService: CartService
   ) {
     this.cartStateChanged = this.cartService.productsState.subscribe(status => {
-      this.count = status;
       this.getCartItems();
     });
   }
 
   ngOnInit() {
     this.getCartItems();
+  }
+
+  ngDestroy() {
+    this.cartStateChanged.unsubscribe();
   }
 
   getCartItems() {

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
+import { FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database-deprecated';
 import { Observable } from 'rxjs/Observable';
 
 import { AuthService } from '../core/auth.service';
@@ -9,6 +10,9 @@ import { Product } from './product';
 @Injectable()
 export class ProductService {
 
+  productlist: AngularFireList<Product>;
+  ratinglist: AngularFireList<any>;
+
   constructor(
     private db: AngularFireDatabase,
     private authService: AuthService
@@ -16,32 +20,26 @@ export class ProductService {
 
   }
 
-  // getProducts(): Observable<any[]> {
-  //   return this.db.list('/products', ref => ref.orderByChild('price')).valueChanges();
-  // }
-
   getProducts() {
-    const productlist: AngularFireList<Product> = this.db.list('/products');
-    return productlist.valueChanges();
+    this.productlist = this.db.list('/products');
+    return this.productlist;
   }
 
   searchProducts(start, end) {
-    const productlist: AngularFireList<Product> = this.db.list('/products', ref => {
+    this.productlist = this.db.list('/products', ref => {
       return ref.orderByChild('keywords').startAt(start.toLowerCase()).endAt(end.toLowerCase());
     });
-    return productlist.valueChanges();
+    return this.productlist;
   }
 
-  // productMarkAsAddedToCart(products: Array<Product>) {
-  //   const cart = localStorage.getItem('cart');
-  //   const productsInCart: Array<Product> = JSON.parse(cart);
+  rateProduct(result) {
+    this.ratinglist = this.db.list('/ratings');
+    const rating = {};
+    rating['rate'] = 7;
+    rating['productId'] = 7;
+    rating['UID'] = this.authService.currentUserId;
+    this.ratinglist.push(rating);
+    return this.ratinglist;
+  }
 
-  //   return products.map(p => {
-  //     const isInCart = productsInCart.filter(x => p.id === x.id);
-  //     if (isInCart.length > 0) {
-  //       p.addedToCart();
-  //     }
-  //     return p;
-  //   });
-  // }
 }

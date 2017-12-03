@@ -33,7 +33,6 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   ) {
     this.authSubs = this.authService.authState.subscribe(auth => {
-      console.log(auth);
       if (auth) {
         this.router.navigate([Constants.routeDashboard]);
       }

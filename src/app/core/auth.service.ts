@@ -5,17 +5,18 @@ import { AngularFireDatabaseModule, AngularFireDatabase } from 'angularfire2/dat
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase';
 
+import { MatSnackBar } from '@angular/material';
+
 import { Subject } from 'rxjs/Subject';
 
 
-import { MatSnackBar } from '@angular/material';
 
 @Injectable()
 export class AuthService {
   private authSubject = new Subject<any>();
-
   authState: any = this.authSubject.asObservable();
-  user: any= null;
+
+  user: any = null;
 
   constructor(
     private afAuth: AngularFireAuth,
@@ -151,7 +152,9 @@ export class AuthService {
 
   //// Sign Out ////
   signOut(): void {
-    this.authState = this.authSubject.asObservable();
+    // this.authState = this.authSubject.asObservable();
+    this.user = null;
+    this.authSubject.next(false);
     this.afAuth.auth.signOut();
     this.router.navigate(['/']);
   }

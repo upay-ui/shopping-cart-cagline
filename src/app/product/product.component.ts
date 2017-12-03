@@ -1,9 +1,12 @@
-import { Component, OnInit, Input, Inject } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, Inject } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { Subscription } from 'rxjs/Subscription';
 
+import { MatSnackBar } from '@angular/material';
+
 import { AuthService } from './../core/auth.service';
 import { CartService } from './../cart/cart.service';
+import { ProductService } from './product.service';
 
 import { Product } from './product';
 
@@ -19,24 +22,27 @@ export class ProductComponent implements OnInit {
 
   public rate;
   private authSubs: Subscription;
+  public currentUser;
 
   constructor(
     private cartService: CartService,
+    private productService: ProductService,
     private authService: AuthService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private snackBar: MatSnackBar
+
   ) { }
 
   ngOnInit() {
+
+  }
+
+  ngDistory() {
+
   }
 
   addToCart(product) {
-    // product.addedToCart();
     this.cartService.addToCart(product);
-  }
-
-  removeFromCart(product) {
-    // product.removedFromCart();
-    // this.cartService.removeFromCart(product);
   }
 
   openDialog(): void {
@@ -50,9 +56,20 @@ export class ProductComponent implements OnInit {
       });
 
       dialogRef.afterClosed().subscribe(result => {
+        this.rateProduct(result);
         this.rate = result;
       });
+    } else {
+      this.snackBar.open('Please login before rate this product', 'Error', { duration: 2000 });
     }
+  }
+
+  rateProduct(result) {
+    console.log(result);
+    this.productService.rateProduct(result).snapshotChanges().subscribe(res => {
+      console.log(res);
+    });
+
   }
 
 }

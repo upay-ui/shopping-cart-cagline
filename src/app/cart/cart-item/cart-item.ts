@@ -6,7 +6,6 @@ export class CartItem extends Product {
     constructor(obj) {
         super(obj);
         this.quantity = obj.quantity ? obj.quantity : 1;
-        console.log(this);
     }
 
     static fromJSONArray(array: Array<CartItem>): CartItem[] {

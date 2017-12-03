@@ -13,7 +13,7 @@ import { ProductService } from '../product/product.service';
 export class DashboardComponent implements OnInit, OnDestroy {
 
   products: Product[];
-  private prodSubs: Subscription;
+  private prodSubscription: Subscription;
   private searchProdSubs: Subscription;
 
   constructor(
@@ -30,21 +30,23 @@ export class DashboardComponent implements OnInit, OnDestroy {
     if (typeof this.searchProdSubs !== 'undefined') {
       this.searchProdSubs.unsubscribe();
     }
-    if (typeof this.prodSubs !== 'undefined') {
-      this.prodSubs.unsubscribe();
+    if (typeof this.prodSubscription !== 'undefined') {
+      this.prodSubscription.unsubscribe();
     }
   }
 
   getProducts() {
-    this.prodSubs = this.productService.getProducts().subscribe(res => {
-      this.products = Product.fromJSONArray(res);
-      // this.productMarkAsAddedToCart();
+    // this.prodSubs = this.productService.getProducts().subscribe(res => {
+    //   this.products = Product.fromJSONArray(res);
+    // });
+    this.prodSubscription = this.productService.getProducts().snapshotChanges().subscribe(items => {
+      this.products = items.map(item => {
+        const product = item.payload.val();
+        product['id'] = item.key;
+        return new Product(product);
+      });
     });
   }
-
-  // productMarkAsAddedToCart() {
-  //   this.products = this.productService.productMarkAsAddedToCart(this.products);
-  // }
 
   search($event) {
     const queryText = $event.target.value;
@@ -55,10 +57,12 @@ export class DashboardComponent implements OnInit, OnDestroy {
       this.searchProdSubs.unsubscribe();
     }
 
-    this.searchProdSubs = this.productService.searchProducts(start, end)
-      .subscribe(res => {
-        this.products = Product.fromJSONArray(res);
-        // this.productMarkAsAddedToCart();
+    this.searchProdSubs = this.productService.searchProducts(start, end).snapshotChanges().subscribe(items => {
+      this.products = items.map(item => {
+        const product = item.payload.val();
+        product['id'] = item.key;
+        return new Product(product);
       });
+    });
   }
 }

@@ -14,9 +14,9 @@ export class Product {
         this.price = obj.price;
     }
 
-    static fromJSONArray(array: Array<Product>): Product[] {
-        return array.map(obj => new Product(obj));
-    }
+    // static fromJSONArray(array: Array<Product>): Product[] {
+    //     return array.map(obj => new Product(obj));
+    // }
 
     addedToCart() {
         this.inCart = true;
