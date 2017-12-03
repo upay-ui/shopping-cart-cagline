@@ -14,6 +14,7 @@ import { SpinnerComponent } from './spinner/spinner.component';
 import { AuthService } from './auth.service';
 import { ProductService } from '../product/product.service';
 import { CartService } from '../cart/cart.service';
+import { LoginRouteGuard } from './login-route.guard';
 
 @NgModule({
   imports: [
@@ -25,6 +26,7 @@ import { CartService } from '../cart/cart.service';
     SharedModule
   ],
   providers: [
+    LoginRouteGuard,
     AuthService,
     ProductService,
     CartService,

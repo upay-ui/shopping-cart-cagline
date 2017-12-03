@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 import { Observable } from 'rxjs/Observable';
 
@@ -10,7 +10,7 @@ import { ProductService } from '../product/product.service';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
-export class DashboardComponent implements OnInit, OnDestroy {
+export class DashboardComponent implements OnInit, OnDestroy, AfterViewInit {
 
   products: Product[];
   private prodSubscription: Subscription;
@@ -21,9 +21,13 @@ export class DashboardComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    this.getProducts();
     // this.searchProducts();
 
+  }
+
+  ngAfterViewInit() {
+
+    this.getProducts();
   }
 
   ngOnDestroy() {
@@ -36,14 +40,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   getProducts() {
-    // this.prodSubs = this.productService.getProducts().subscribe(res => {
-    //   this.products = Product.fromJSONArray(res);
-    // });
     this.prodSubscription = this.productService.getProducts().snapshotChanges().subscribe(items => {
       this.products = items.map(item => {
         const product = item.payload.val();
         product['id'] = item.key;
-        console.log(item.payload.child('ratings').val());
         return new Product(product);
       });
 

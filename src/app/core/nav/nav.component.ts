@@ -35,7 +35,6 @@ export class NavComponent implements OnInit, OnDestroy {
     });
 
     this.cartStateChanged = this.cartService.productsState.subscribe(status => {
-      console.log('status', status);
       this.count = status;
     });
   }

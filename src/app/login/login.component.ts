@@ -37,7 +37,6 @@ export class LoginComponent implements OnInit, OnDestroy {
         this.router.navigate([Constants.routeDashboard]);
       }
     });
-
   }
 
   ngOnInit() {
@@ -45,7 +44,6 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.authSubs.unsubscribe();
   }
 
   buildForm(): void {
@@ -85,7 +83,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   login() {
     this.authService.emailLogin(this.loginForm.value.email, this.loginForm.value.password).then((data) => {
-      // console.log(data);
+      console.log(data);
     });
   }
 
@@ -100,27 +98,17 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   loginWithGoogle() {
     this.authService.googleLogin().then((data) => {
-      // this.navigateToDashboard();
     });
   }
 
   loginWithFacebook() {
     this.authService.facebookLogin().then((data) => {
-      this.navigateToDashboard();
     });
   }
 
   loginWithGithub() {
     this.authService.githubLogin().then((data) => {
-      this.navigateToDashboard();
     });
   }
-
-  navigateToDashboard() {
-    if (this.authService.currentUser) {
-      this.router.navigate([Constants.routeDashboard]);
-    }
-  }
-
 
 }

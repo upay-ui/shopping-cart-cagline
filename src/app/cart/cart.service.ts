@@ -39,7 +39,6 @@ export class CartService {
     this.products = this.products.reduce((p, c) => {
       if (seen.hasOwnProperty(c.id)) {
         p[seen[c.id]].quantity = p[seen[c.id]].quantity + 1;
-        console.log(p);
         return p;
       } else {
         seen[c.id] = p.length;
