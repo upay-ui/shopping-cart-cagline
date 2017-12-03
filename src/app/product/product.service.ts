@@ -27,7 +27,7 @@ export class ProductService {
 
   searchProducts(start, end) {
     this.productlist = this.db.list('/products', ref => {
-      return ref.orderByChild('keywords').startAt(start.toLowerCase()).endAt(end.toLowerCase());
+      return ref.orderByChild('keywords').startAt(start).endAt(end);
     });
     return this.productlist;
   }

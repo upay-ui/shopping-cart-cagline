@@ -52,8 +52,8 @@ export class DashboardComponent implements OnInit, OnDestroy, AfterViewInit {
 
   search($event) {
     const queryText = $event.target.value;
-    const start = queryText;
-    const end = queryText + '\uf8ff';
+    const start = queryText.toLowerCase();
+    const end = queryText.toLowerCase() + '\uf8ff';
 
     if (typeof this.searchProdSubs !== 'undefined') {
       this.searchProdSubs.unsubscribe();
