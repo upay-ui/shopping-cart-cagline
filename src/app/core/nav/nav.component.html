@@ -1,9 +1,9 @@
-<mat-toolbar color="primary" class="mb-30">
+<mat-toolbar md-scroll-shrink color="primary" class="mb-30 md-scroll-shrink">
   <mat-toolbar-row>
     <a routerLink="/" class="docs-navbar-hide-small docs-button mat-button">Shopping Cart</a>
     <span class="spacer"></span>
     <a id="min-cart" routerLink="cart">
-      <mat-icon aria-label="add to cart">add_shopping_cart</mat-icon>
+      <mat-icon aria-label="add to cart"  [ngClass]="{'rotate': swing}">add_shopping_cart</mat-icon>
       <span>{{count}}</span>
     </a>
     <mat-icon>user</mat-icon>

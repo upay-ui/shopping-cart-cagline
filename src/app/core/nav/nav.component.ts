@@ -16,6 +16,7 @@ export class NavComponent implements OnInit, OnDestroy {
 
   private cartStateChanged: Subscription;
   public count;
+  public swing: Boolean = false;
 
   constructor(
     private authService: AuthService,
@@ -36,6 +37,10 @@ export class NavComponent implements OnInit, OnDestroy {
 
     this.cartStateChanged = this.cartService.productsState.subscribe(status => {
       this.count = status;
+      this.swing = true;
+      setTimeout(() => {
+        this.swing = false;
+      }, 1000);
     });
   }
 

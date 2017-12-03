@@ -7,11 +7,43 @@ mat-toolbar {
 }
 
 #min-cart {
+    width: 42px;
+    height: 38px;
     mat-icon {
-        vertical-align: bottom;
+        vertical-align: middle;
     }
     span {
         font-size: .8em;
         font-weight: 400;
+    }
+}
+
+.rotate {
+    -webkit-animation: rotate 1s linear;
+    width: 28px;
+    height: 28px;
+}
+
+@-webkit-keyframes rotate {
+    0% {
+        -webkit-transform: rotate(0deg);
+    }
+    25% {
+        -webkit-transform: rotate(20deg);
+        width: 28px;
+        height: 28px;
+    }
+    50% {
+        -webkit-transform: rotate(0deg);
+        width: 28px;
+        height: 28px;
+    }
+    75% {
+        -webkit-transform: rotate(-20deg);
+        width: 28px;
+        height: 28px;
+    }
+    100% {
+        -webkit-transform: rotate(0deg);
     }
 }
