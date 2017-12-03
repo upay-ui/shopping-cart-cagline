@@ -65,11 +65,9 @@ export class ProductComponent implements OnInit {
   }
 
   rateProduct(result) {
-    console.log(result);
-    this.productService.rateProduct(result).snapshotChanges().subscribe(res => {
+    this.productService.rateProduct(this.product, result).snapshotChanges().subscribe(res => {
       console.log(res);
     });
-
   }
 
 }

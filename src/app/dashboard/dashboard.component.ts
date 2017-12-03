@@ -43,8 +43,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
       this.products = items.map(item => {
         const product = item.payload.val();
         product['id'] = item.key;
+        console.log(item.payload.child('ratings').val());
         return new Product(product);
       });
+
     });
   }
 

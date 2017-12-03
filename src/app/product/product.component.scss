@@ -1,3 +1,18 @@
-.addToCart, .removeFromCart{
+.addToCart,
+.removeFromCart {
     width: 100%;
+}
+
+.product-card-price {
+    float: right;
+}
+
+.product-card-rate {
+    sub {
+        vertical-align: baseline;
+        color: #999;
+    }
+}
+.product-card-no-of-users{
+    color: #999;
 }

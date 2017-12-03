@@ -32,11 +32,10 @@ export class ProductService {
     return this.productlist;
   }
 
-  rateProduct(result) {
-    this.ratinglist = this.db.list('/ratings');
+  rateProduct(product, result) {
+    this.ratinglist = this.db.list('/products/' + product.id + '/ratings');
     const rating = {};
-    rating['rate'] = 7;
-    rating['productId'] = 7;
+    rating['rate'] = result;
     rating['UID'] = this.authService.currentUserId;
     this.ratinglist.push(rating);
     return this.ratinglist;
