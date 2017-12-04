@@ -19,6 +19,7 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
+        "cyan-pink-light.scss",
         "styles.scss"
       ],
       "scripts": [],
